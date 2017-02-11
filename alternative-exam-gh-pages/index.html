@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<head>
+
+    <meta charset="utf-8"/>
+
+    <title>Тренажёр поиска взаимно-однозначных соотношений</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script type="text/javascript" src="brackets.js"></script>
+    <script type="text/javascript" src="draw_ntangle.js"></script>
+    <script type="text/javascript" src="draw_monoway.js"></script>
+    <script type="text/javascript" src="draw_yung_table.js"></script>
+    <script type="text/javascript" src="draw_bin_tree.js"></script>
+    <script type="text/javascript" src="draw_pair_dotes_circle.js"></script>
+    <script type="text/javascript" src="draw_brackets.js"></script>
+    <script type="text/javascript" src="core.js"></script>
+    <!-- this is a comment <canvas id="canvas" width="300" height="300"></canvas>-->
+
+
+</head>
+
+<body onload="gen_menu();">
+
+
+<div class="wrapper">
+
+
+    <div class="header">
+
+
+        <br/>
+        <img src="leti.png" align="left" class="logo"/>
+
+        <h1><a href="index.html">Тренажёр поиска взаимно-однозначных соотношений</a></h1>
+
+
+        На примере различных интерпретаций чисел Каталана
+
+
+        <br/><br/>
+
+
+    </div>
+
+
+    <div class="left_col">
+
+
+        <form>
+            <p>Взаимно-однозначное соотношение между:</p>
+            <select name="inter1">
+
+            </select><br/>
+            <p>и:</p>
+            <select name="inter2">
+
+            </select><br/><br/>
+            <p>Режим:</p>
+            <select name="mode" size="3">
+                <option value="trainer" selected="selected">Тренажёр</option>
+                <option value="control">Контроль</option>
+            </select><br/><br/>
+            <input type="button" value="Выбрать" onClick="handler(this.form);">
+
+            <br/> <br/><input type="button" value="Проверить" onClick="checkAnswers();">
+        </form>
+
+
+    </div>
+
+
+    <div class="main_col">
+
+
+        <h2 id="main_h2">Главная</h2>
+        <div id="index">
+            <p>Здравствуйте! Вашему вниманию предлагается тренажёр для тренировки поиска взаимно-однозначных соотношений
+                между различными интерпретациями чисел Каталана.</p>
+            <h3>Инструкция</h3>
+            <p>Тренажёр имеет два режима: тренажёр и контроль. В обоих режимах программа выводит два столбца элементов
+                для выбранной пары интерпретаций. У каждого элемента из левого столбца есть взаимно-однозначная пара в
+                правом. Вам предлагается самостоятельно придумать правило, связывающее две интерпретации.
+                <!--<br/>В режиме <b>демонстрация</b> для выбранной пары интерпретаций программа продемонстрирует связь между этими интерпретациями и правильными скобочными записями. Вам предлагается самостоятельно придумать правило, связывающее эти две интерпретации. -->
+                <br/>В режиме <b>тренажёр</b> вы можете проверить своё правило на простых примерах, для числа Каталана
+                n=3. <br/> В режиме <b>контроль</b> вам нужно будет применить ваше правило для значительно более сложных
+                случаев, для чисел Каталана n=6</p>
+        </div>
+        <div id="result" class="result"></div>
+        <div id="content">
+            <div class="clear" id="top"></div>
+        </div>
+
+
+    </div>
+
+
+    <br class="clearer"/>
+
+
+    <div class="footer">
+
+
+
+			<span class="small">
+
+				2016 год, СПбГЭТУ "ЛЭТИ", кафедра ВМ-2
+
+				<br/>
+
+			</span>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
+

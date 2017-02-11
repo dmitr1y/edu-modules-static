@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+
+    text-align: left;
+
+    width: 100%;
+
+    height: 100%;
+
+    font-size: 14px;
+
+    font-family: Helvetica, arial, sans-serif;
+
+    color: #000;
+
+    background: #fff;
+
+    margin: 0;
+
+    border: 0;
+
+    padding: 0;
+}
+
+p {
+    font-size: 14px;
+}
+
+h1 a {
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+}
+
+.left_col a {
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+}
+
+.left_col a:hover {
+    color: #fff;
+    text-decoration: underline;
+    outline: none;
+}
+
+.left_col a:visited {
+    color: #fff;
+}
+
+.left_col a:active {
+    color: #fff;
+}
+
+img, a img {
+    border-style: none;
+}
+
+h1, h2, h4, h5, h6 {
+    font-style: normal;
+    font-weight: lighter;
+}
+
+h3 {
+    font-style: italic;
+    font-weight: lighter;
+    text-decoration: underline;
+}
+
+.small {
+    font-size: .9em;
+}
+
+.clearer {
+    clear: both;
+}
+
+.header {
+
+    text-align: left;
+
+    background: #4f0f00;
+
+    color: #fff;
+
+    width: 100%;
+
+    margin: 0 0 0 0;
+
+    border: 0;
+
+    padding: 10px;
+
+    overflow: hidden;
+
+}
+
+.left_col {
+
+    text-align: left;
+
+    float: left;
+
+    background: #007ca5;
+
+    color: #fff;
+
+    width: 15%;
+
+    height: 100%;
+
+    margin: 0 0 0 0;
+
+    border: 0;
+
+    padding: 10px;
+
+    overflow: hidden;
+
+}
+
+.main_col {
+
+    text-align: left;
+
+    float: right;
+
+    background: #fff;
+
+    color: #000;
+
+    width: 80%;
+
+    margin: 0 0 0 0;
+
+    border: 0;
+
+    padding: 10px;
+
+    /*	overflow: hidden;*/
+
+}
+
+.footer {
+
+    text-align: left;
+
+    background: #eceae1;
+
+    color: #000;
+
+    width: 100%;
+
+    margin: 0 0 0 0;
+
+    border: 0;
+
+    padding: 10px;
+
+    overflow: hidden;
+
+}
+
+.wrapper {
+
+    text-align: center;
+
+    width: 100%;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.menu ul {
+    display: none;
+}
+
+.clear {
+    clear: left; /* Отмена обтекания */
+}
+
+.trainer {
+    border-collapse: collapse; /* Убираем двойные границы между ячейками */
+    border: 1px solid #000; /* Рамка вокруг таблицы */
+}
+
+.trainer td {
+    padding: 10px;
+}
+
+.yung td {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.bijection {
+    font-size: 40px;
+}
+
+.trainer .selected {
+    backround: #000;
+}
+
+.br-ts, .br-ts td {
+    border: none;
+}
+
+.br-tb {
+    font-size: 20px;
+}
+
+.br-n {
+    font-size: 10px;
+}
+
+.result {
+    border: 1px solid black;
+    padding: 10px;
+    font-weight: 1.5em;
+    margin-top: 10px;
+    display: none;
+}

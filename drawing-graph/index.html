@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Раскраска графа</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="bower_components/d3/d3.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/webcola/WebCola/cola.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="call.js"></script>
+</head>
+<body>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Навигация</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Раскраска графа</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav link-slow-scroll">
+                <li><a href="#task">Задание</a></li>
+                <li><a href="#docteo">Теорема о пути в графе</a></li>
+                <li><a href="#draw_graph">Правильная раскраска графа</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="wrapper" id="task" style="margin-top: 100px">
+
+    <div class="page-header">
+        <h1>Задание</h1>
+    </div>
+    <p class="lead">
+        Рассматриваем правильные раскраски связных графов (правильная означает, что концы каждого ребра покрашены
+        разными
+        цветами). Хроматическое число графа h - наименьшее число красок, которыми можно раскрасить граф правильно. Есть
+        теорема о том, что в таком графе всегда можно найти путь, который будет содержать по одной вершине каждого
+        цвета.
+    </p>
+
+    <p class="lead">
+        1) попробовать доказать самому или найти доказательство этой теоремы
+    </p>
+    <span class="badge badge-primary">Исследование:</span>
+
+    <p class="lead">
+        2) написать программу, которая находит хроматическое число графа h, а потом строит для него наихудшую правильную
+        раскраску, то есть такую, что число путей, о которых говорилось выше, будет минимальным
+    </p>
+
+</div>
+
+<div class="wrapper" id="docteo">
+    <div class="page-header">
+        <h2><i class="glyphicon glyphicon-tags"></i> Теорема о пути в графе</h2>
+    </div>
+    <p class="lead">Саму теорему, к сожалению, не нашёл. Но есть проверенный алгоритм поиск такого пути.</p>
+    <ol class="lead">
+        <li>Введём ориентацию рёбер на раскрашенном графе, направляя их от цвета с меньшим номером к цвету с большим
+            номером.
+            <ul>
+                <li>Если найдётся путь по стрелкам, имеющий h вершин, то всё доказано (номера цветов при этом идут по
+                    порядку).
+                </li>
+            </ul>
+        </li>
+        <li>Допустим, что такого пути не нашлось. Тогда для каждой вершины рассмотрим наибольшее число вершин пути по
+            стрелкам с началом в данной вершине. Эта величина принимает значения от 1 до h-1 (если у всех соседей
+            вершины номера цветов меньше данного, то она равна 1).
+        </li>
+        <li>Сопоставим каждой вершине это значение. Оно даёт новую раскраску не более чем в h-1 цвет.</li>
+        <li>Проверим, что она является правильной. Допустим, что у двух соседних в исходном графе вершин v и w новые
+            цвета совпали и оказались равны s. Старый цвет одной из вершин был меньше цвета другой вершины, и можно
+            считать, что из v в w была поставлена стрелка.
+        </li>
+        <li>Тогда можно пойти по стрелке из v в w, а потом пройти из w каким-то путём с s вершинами, всё время
+            увеличивая номера цветов. Это значит, что путь из v длиннее, и этой вершине не мог соответствовать тот же
+            новый цвет, что и для w.
+        </li>
+    </ol>
+
+</div>
+<div class="wrapper" id="draw_graph">
+    <div class="page-header">
+        <h2><i class="glyphicon glyphicon-tags"></i> Правильная раскраска графа</h2>
+    </div>
+    <p>
+    </p>
+    <ul class="lead">
+        <li>Раскраска называется правильной, если образы любых двух смежных вершин различны.</li>
+        <li>Хроматическим числом (h) графа называется минимальное количество красок, необходимое для правильной
+            раскраски графа.
+        </li>
+        <li>Используем только неориентированные графы и без петель.</li>
+        <li>Количество вершин должно быть строго от 0 до 20 (включительно). Данное ограчение введено для того, чтобы
+            пользователи не повесили свой браузер. А также, визуально больше 20 элементов смотрится не очень
+            информативно.
+        </li>
+        <li>Рекомендуется смотреть с браузера Google Chrome (наиболее быстрая обработка JavaScript кода), и с монитора,
+            у которого разрешение от 1024px в ширину.
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-12"><h3><i class="glyphicon glyphicon-wrench"></i> Конфигурация</h3></div>
+        <div class="col-md-3">
+            <form action="#" method="post" class="form-generate-nodes">
+                <div class="form-group">
+                    <label for="nodes">Количество вершин</label>
+                    <input type="text" class="form-control" id="nodes">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Сгенерировать вершины</button>
+
+            </form>
+        </div>
+        <div class="col-md-6 adjacency_matrix">
+            <form action="#" method="post" class="form-inline form-generate-graph">
+                <div class="form-group">
+                    <label>Матрица смежности</label>
+                </div>
+                <div class="clearfix"></div>
+                <div class="adjacency_matrix_content">
+                    <p>Не указано количество вершин</p>
+                </div>
+                <button type="submit" class="btn btn-primary" disabled>Сгенерировать граф</button>
+            </form>
+        </div>
+        <div class="col-md-3">
+            <h4>Результат</h4>
+
+            <div class="result_calculate">
+                <p class="result_calculate_none">Граф не сгенерирован</p>
+
+                <div class="result_calculate_colors_list">
+                    <p>Использованы следующие цвета: </p>
+                    <ul class="result_calculate_colors">
+                        <li>1</li>
+                        <li><span class="js-color-update" data-color="0" style="background: rgb(44, 160, 44);">0</span>
+                        </li>
+                    </ul>
+                    <p>Число h = <span class="result_calculate_colors_count"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <h3 class="text-center"><span class="glyphicon glyphicon-eye-open"></span> Визуальное отображение графа</h3>
+
+    <p class="text-center"><span class="glyphicon glyphicon-zoom-in"></span> Граф можно масштабировать прокруткой колеса
+        мышки.</p>
+
+    <div class="area_graph">
+        <p class="empty"><span class="glyphicon glyphicon-hand-up"></span>Сначала нужно сгенерировать граф. Конфигуратор
+            находится выше. <span class="glyphicon glyphicon-hand-up"></span></p>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row logs_graph">
+        <div class="col-md-12">
+            <h3>Лог работы алгоритма</h3>
+
+            <p class="empty_log">Граф не сгенерирован</p>
+        </div>
+        <div class="col-md-5 logs_graph_sorting" style="display: none">
+            <h4>1. Процесс сортировки</h4>
+            <ul>
+                <li class="logs_graph_sorting_before">Вершины до сортировки
+                    <ol></ol>
+                </li>
+                <li class="logs_graph_sorting_after">Вершины после сортировки
+                    <ol></ol>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-7 logs_graph_paints" style="display:none;">
+            <h4>2. Процесс окрашивания</h4>
+            <ol></ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+
+        <div class="col-md-12">
+            <h3>Алгоритм</h3>
+
+            <p>У нас имеется три массива:</p>
+            <ul>
+                <li>Массив <span class="label label-success">RESULT</span> - конечный массив с [ID вершины; Номер цвета]
+                </li>
+                <li>Массив <span class="label label-info">COLORS</span> - список всех использованных цветов</li>
+                <li>Массив <span class="label label-warning">USED_COLORS</span> - список цветов, которые нельзя
+                    использовать, так как эти цвета уже используют соседние вершины
+                </li>
+            </ul>
+
+            <p><b>Формальная работа алгоритма</b></p>
+            <ol>
+                <li>Отсортировать вершины по убыванию мощности</li>
+                <li>Выбираем первую вершину, проверяем какие цвета у связныъ с данной вершиной вершины и сохраняем в
+                    массив <span class="label label-warning">USED_COLORS</span></li>
+                <li>После этого проходим по массиву <span class="label label-info">COLORS</span>, начиная с 0.
+                    Сравниванием, если цвет в <span class="label label-warning">USED_COLORS</span>, если нет - выбираем
+                    его. Если есть, то идем дальше i++
+                </li>
+                <li>Если массив <span class="label label-info">COLORS</span> закончился, то к последнему цвету добавляем
+                    единицу и сохраняем в массив <span class="label label-success">RESULT</span> в виде массива [ID
+                    вершины; Номер цвета]
+                </li>
+            </ol>
+
+            <p><b>Словесное описание алгоритма</b></p>
+
+            <p>
+                Изначальные данные: <br>
+            </p>
+            <ul>
+                <li>Массив <span class="label label-success">RESULT</span> - конечный массив с [ID вершины; Номер
+                    цвета]. Изначально пустой.
+                </li>
+                <li>Массив <span class="label label-info">COLORS</span> - список всех использованных цветов. Изначально
+                    один цвет под номером 0.
+                </li>
+                <li>Массив <span class="label label-warning">USED_COLORS</span> - список цветов, которые нельзя
+                    использовать, так как эти цвета уже используют соседние вершины. Изначально пустой.
+                </li>
+            </ul>
+            <p>
+                1. Сначала мы сортируем массив в порядке убывания мощностей вершин.
+            </p>
+
+            <p>2. Затем мы начинаем проходить по массиву, смотрим первую вершину в нашем списке. Смотрим на связанные с
+                этой вершиной вершины, и если какая-то из них разукрашена, то добавляем этот цвет в массив <span
+                        class="label label-warning">USED_COLORS</span>. При этом, в очередь мы добавляем неразукрашенные
+                связанные вершины, чтобы данный максимальный подграф был полностью разукрашен.
+            </p>
+
+            <p>
+                3. Далее, когда мы прошли по связанным вершинам, и занесли уже использованные цвета в массив <span
+                    class="label label-warning">USED_COLORS</span>, проходим теперь по массиву <span
+                    class="label label-info">COLORS</span>. Начинаем с нулевого цвета, сравниваем, есть ли данный цвет в
+                массиве <span class="label label-warning">USED_COLORS</span>. Если есть - переходим к следующем цвету в
+                массиве <span class="label label-info">COLORS</span>.
+            </p>
+
+            <p>4. Если цвета в <span class="label label-info">COLORS</span> закончились, то мы к последнему цвету
+                добавляем
+                единицу и сохраняем в массиве <span class="label label-success">RESULT</span>.</p>
+
+            <p>5. Дальше, когда мы хотим покрасить следующую вершину, мы обнуляем массив <span
+                    class="label label-warning">USED_COLORS</span> и повторяем всё с пункта 2. Таким образом, мы обходим
+                все вершины и все цвета проверяем на минимальное количество.
+            </p>
+        </div>
+
+        <div class="col-md-12">
+            <h3>Пример работы алгоритма</h3>
+            <div>
+                <p>Ниже показано, как пошагово работает алгоритм.</p>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#example1" aria-controls="home" role="tab"
+                                                              data-toggle="tab">Пример 1</a></li>
+                    <li role="presentation"><a href="#example2" aria-controls="profile" role="tab" data-toggle="tab">Пример
+                        2</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="example1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="img/example1/1.png" class="thumbnail" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                <img src="img/example1/2.png" class="thumbnail" alt="">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6">
+                                <img src="img/example1/3.png" class="thumbnail" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                <img src="img/example1/4.png" class="thumbnail" alt="">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6">
+                                <img src="img/example1/5.png" class="thumbnail" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                <img src="img/example1/6.png" class="thumbnail" alt="">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="example2">Пример ещё не загружен..</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <h3>Используемые технологии и библиотеки</h3>
+            <ul>
+                <li><a href="https://d3js.org/">D3.js</a> - JavaScript библиотека для работы с деревом DOM на основе
+                    данных.
+                </li>
+                <li><a href="http://marvl.infotech.monash.edu/webcola/">cola.js</a> - JavaScript библиотека для создания
+                    различных слоев макета, в особенности используется для диаграмм и графов. Использует наиболее
+                    оптимизированные алгоритмы построения среди JavaScript библиотек.
+                </li>
+                <li><a href="https://jquery.com/">jQuery</a> - JavaScript библиотека для взаимодействия JavaScript и
+                    HTML кода. Используется как обертка над чистым JavaScript для более кроссбраузерное и быстрой
+                    работой с DOM элементами.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
