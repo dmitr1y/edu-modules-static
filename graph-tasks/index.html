@@ -1,0 +1,157 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Первая страница.</title>
+    <style>
+        /* здесь описаны стили оформления ссылок*/
+        a:link {
+            color: #0033FF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #666633;
+            text-decoration: underline;
+        }
+
+        /* здесь описаны стили оформления контента
+
+       <input type="submit" value="полн двуд" onClick="alert(test_polnaia_dvudolnost(JSON.parse(guist('g85n73u86','get')))) " >
+       <input type="submit" value="двуд" onClick="alert(test_dvudolnost(JSON.parse(guist('g85n73u86','get')))) ">
+       <input type="submit" value="граф" onClick="alert(guist('g85n73u86','get')) ">
+       <input type="submit" value="планарность" onClick="alert(is_planar(JSON.parse(guist('g85n73u86','get')))) ">
+       <input type="submit" value="gen_planar" onClick='guist("g85n73u86","set",gen_planar(15,4)) '>
+       <input type="submit" value="gen_not_planar" onClick='guist("g85n73u86","set",gen_not_planar(15,4)) '>
+
+       <input type="submit" value="K3,3" onClick='guist("g85n73u86","set",JSON.stringify({"n":6,"a":[[null,null,null,{"c":0},{"c":0},{"c":0},null],[null,null,null,{"c":0},{"c":0},{"c":0},null],[null,null,null,{"c":0},{"c":0},{"c":0},null],[{"c":0},{"c":0},{"c":0},null,null,null,null],[{"c":0},{"c":0},{"c":0},null,null,null,null],[{"c":0},{"c":0},{"c":0},null,null,null,null]],"point":[{"x":0.404,"y":0.4083333333333333,"c":0},{"x":0.496,"y":0.66,"c":0},{"x":0.573,"y":0.775,"c":0},{"x":0.422,"y":0.7983333333333333,"c":0},{"x":0.576,"y":0.36666666666666664,"c":0},{"x":0.493,"y":0.5066666666666667,"c":0}],"or":0}))'>
+       <input type="submit" value="K5" onClick='guist("g85n73u86","set",JSON.stringify({"n":5,"a":[[null,{"c":0},{"c":0},{"c":0},{"c":0}],[{"c":0},null,{"c":0},{"c":0},{"c":0}],[{"c":0},{"c":0},null,{"c":0},{"c":0}],[{"c":0},{"c":0},{"c":0},null,{"c":0}],[{"c":0},{"c":0},{"c":0},{"c":0},null]],"point":[{"x":0.515,"y":0.7116666666666667,"c":0},{"x":0.405,"y":0.7166666666666667,"c":0},{"x":0.353,"y":0.5483333333333333,"c":0},{"x":0.449,"y":0.4066666666666667,"c":0},{"x":0.554,"y":0.545,"c":0}],"or":0}))'>
+
+        */
+        #kontent {
+            text-align: center;
+        }
+    </style>
+</head>
+<body id="kontent">
+Это некоторые задачи на графах.
+Задача выбирается в списке который находится ниже.
+<br>
+Также можно открыть редактор графов(в редакторе можно проверитть как работают модули).
+<br>
+<br>
+<a href="red.html">Редактор графов</a>
+<br>
+
+<SELECT name="Селект" id="quest_select" OnChange='quest_select()'>
+    <OPTION VALUE="0">Выберите задачу</OPTION>
+    <OPTION VALUE="1">1</OPTION>
+    <OPTION VALUE="2">2</OPTION>
+    <OPTION VALUE="3">3</OPTION>
+    <OPTION VALUE="4">4</OPTION>
+    <OPTION VALUE="5">5(Gen)</OPTION>
+    <OPTION VALUE="6">6(Gen)</OPTION>
+</SELECT>
+
+<br>
+
+<div id="quest_text" style="overflow: auto; margin: auto; width: 800px; height: 100px; border: 1px solid black;"></div>
+
+<br>
+
+<CANVAS height='500' width='800' id='g85n73u86' tabindex="0">Обновите браузер</CANVAS>
+
+<br>
+
+<br>
+
+
+<br>
+<textarea id="the_super_data_inpet" name="comment" cols="40" rows="3"></textarea>
+<br>
+<input type="submit" value="Проверить ответ"
+       onClick='quest_test(document.getElementById("the_super_data_inpet").value)'>
+
+
+<div id="logs" style=" overflow: auto; width: 800px; height: 400px; border: 1px solid black;">
+    Логи<br>
+
+</div>
+
+<script src="graph_redactor.js"></script>
+<script src="test_graph.js"></script>
+<script src="quests_manager.js"></script>
+
+
+<script>
+    //guist('g85n73u86',"init",JSON.stringify({is_orient:1, gui_buttons:[0,1,2,3,4,5,6,7,8]}));
+
+
+    //guist('g85n73u86',"set",JSON.stringify());
+
+
+    //{"n":5,"a":[[null,{"c":0},{"c":0},{"c":0},{"c":0}],[{"c":0},null,null,null,{"c":0}],[{"c":0},null,null,{"c":0},null],[{"c":0},null,{"c":0},null,null],[{"c":0},{"c":0},null,null,null],[{"c":-1,"n":-1},null,null,null,{"c":-1,"n":-1},null,{"c":-1,"n":-1}],[{"c":-1,"n":-1},null,{"c":-1,"n":-1},null,null,{"c":-1,"n":-1},null]],"point":[{"x":0.357,"y":0.6283333333333333,"c":0},{"x":0.539,"y":0.765,"c":0},{"x":0.212,"y":0.5466666666666666,"c":0},{"x":0.212,"y":0.765,"c":0},{"x":0.504,"y":0.4866666666666667,"c":0},{"x":0.712,"y":0.385,"c":2,"n":5,"cid":-1},{"x":0.539,"y":0.33666666666666667,"c":2,"n":6,"cid":-1}],"or":0}
+    //{"n":7,"a":[[null,{"c":0},{"c":0},{"c":0},{"c":0},{"c":0},{"c":0}],[{"c":0},null,{"c":0},{"c":0},null,null,null],[{"c":0},{"c":0},null,null,null,null,{"c":0}],[{"c":0},{"c":0},null,null,{"c":0},null,null],[{"c":0},null,null,{"c":0},null,{"c":0},null],[{"c":0},null,null,null,{"c":0},null,{"c":0}],[{"c":0},null,{"c":0},null,null,{"c":0},null],[null,null,null,{"c":-1,"n":-1},{"c":-1,"n":-1},null,null,null,null,null,null,null,null,null],[null,null,null,{"c":-1,"n":-1},{"c":-1,"n":-1},null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,{"c":-1,"n":-1},{"c":-1,"n":-1},null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,{"c":-1,"n":-1},{"c":-1,"n":-1},null,null,null,null,null],[null,null,null,{"c":-1,"n":-1},{"c":-1,"n":-1},null,null,null,null,null,null,null,null,null]],"point":[{"x":0.532,"y":0.535,"c":0},{"x":0.416,"y":0.6816666666666666,"c":0},{"x":0.391,"y":0.42833333333333334,"c":0},{"x":0.584,"y":0.75,"c":0},{"x":0.73,"y":0.5733333333333334,"c":0},{"x":0.712,"y":0.385,"c":0},{"x":0.539,"y":0.33666666666666667,"c":0},{"x":6.53e-10,"y":2.384259259259259e-9,"c":2,"n":13,"cid":-1},{"x":6.53e-10,"y":2.384259259259259e-9,"c":2,"n":13,"cid":-1},{"x":0.0008359999999999999,"y":0.0013611111111111111,"c":0,"n":11,"cid":-1},{"x":6.53e-10,"y":2.384259259259259e-9,"c":2,"n":13,"cid":-1},{"x":0.0008359999999999999,"y":0.0013611111111111111,"c":0,"n":11,"cid":-1},{"x":0.19,"y":0.37333333333333335,"c":0,"n":12,"cid":-1},{"x":6.53e-10,"y":2.384259259259259e-9,"c":2,"n":13,"cid":-1}],"or":0}
+    //{"n":12,"a":[[null,null,null,{"c":0},null,{"c":0},null,null,null,{"c":0},{"c":0},null],[null,null,{"c":0},null,{"c":0},null,{"c":0},{"c":0},null,null,null,{"c":0}],[null,{"c":0},null,{"c":0},null,null,null,null,null,null,null,null],[{"c":0},null,{"c":0},null,null,null,null,null,null,null,null,null],[null,{"c":0},null,null,null,{"c":0},null,null,null,null,null,null],[{"c":0},null,null,null,{"c":0},null,null,null,null,null,null,null],[null,{"c":0},null,null,null,null,null,{"c":0},null,{"c":0},{"c":0},{"c":0}],[null,{"c":0},null,null,null,null,{"c":0},null,{"c":0},null,null,null],[null,null,null,null,null,null,null,{"c":0},null,{"c":0},null,null],[{"c":0},null,null,null,null,null,{"c":0},null,{"c":0},null,{"c":0},null],[{"c":0},null,null,null,null,null,{"c":0},null,null,{"c":0},null,null],[null,{"c":0},null,null,null,null,{"c":0},null,null,null,null,null]],"point":[{"x":0.491,"y":0.755,"c":0},{"x":0.492,"y":0.405,"c":0},{"x":0.144,"y":0.4116666666666667,"c":0},{"x":0.147,"y":0.7766666666666666,"c":0},{"x":0.821,"y":0.4033333333333333,"c":0},{"x":0.814,"y":0.735,"c":0},{"x":0.429,"y":0.575,"c":0},{"x":0.561,"y":0.5,"c":0},{"x":0.601,"y":0.6166666666666667,"c":0},{"x":0.517,"y":0.6633333333333333,"c":0},{"x":0.42,"y":0.675,"c":0},{"x":0.443,"y":0.48,"c":0}],"or":0}
+</script>
+
+<SCRIPT>
+
+    /*
+     var canvas = document.getElementById('g85n73u86');
+     canvas.addEventListener('keydown', doKeyDown, true);
+
+     canvas_context = canvas.getContext("2d");
+     canvas_context.fillRect(100, 100, 50, 30);
+
+     var x = 100;
+     var y = 100;
+
+     function doKeyDown(e){
+     alert("OMG");
+     //====================
+     //	THE W KEY
+     //====================
+     if (e.keyCode == 87) {
+     clearCanvas();
+     y = y - 10;
+     canvas_context.fillRect(x, y, 50, 30);
+     }
+
+     //====================
+     //	THE S KEY
+     //====================
+     if (e.keyCode == 83) {
+     clearCanvas();
+     y = y + 10;
+     canvas_context.fillRect(x, y, 50, 30);
+     }
+
+     //====================
+     //	THE A KEY
+     //====================
+     if (e.keyCode == 65) {
+     clearCanvas();
+     x = x - 10;
+     canvas_context.fillRect(x, y, 50, 30);
+     }
+
+     //====================
+     //	THE D KEY
+     //====================
+     if (e.keyCode == 68) {
+     clearCanvas();
+     x = x + 10;
+     canvas_context.fillRect(x, y, 50, 30);
+     }
+
+     }
+
+     function clearCanvas() {
+     canvas.width = canvas.width;
+     }
+     */
+
+</SCRIPT>
+
+</body>
+</html>
