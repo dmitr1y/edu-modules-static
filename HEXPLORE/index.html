@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HEXPLORE</title>
+    <link rel="icon" href="img/192x192.png">
+    <script type="text/javascript" src="lib/Three.js"></script>
+    <script type="text/javascript" src="lib/Dat.Gui.Min.js"></script>
+    <script type="text/javascript" src="js/Cell.js"></script>
+    <script type="text/javascript" src="js/Grid.js"></script>
+    <script type="text/javascript" src="js/DefaultColor.js"></script>
+    <script type="text/javascript" src="js/ColorValue.js"></script>
+    <script type="text/javascript" src="js/VisitValue.js"></script>
+    <script type="text/javascript" src="js/Main.js"></script>
+    <script type="text/javascript">
+        function showContent(id) {
+            var tabcontent = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            document.getElementById(id).style.display = "block";
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body oncontextmenu="return false" ;>
+<div id="hexplore-id">
+    <div id="info-id" class="message">
+        <div class="content">
+            <div class="header" id="info-header-id">
+                <span class="close" id="info-close-id">×</span>
+                <h2>СПРАВКА</h2>
+            </div>
+            <div class="body">
+                <ul class="tab">
+                    <li><a onclick="showContent('about')">ОБ ИГРЕ</a></li>
+                    <li><a onclick="showContent('how-to-play')">КАК ИГРАТЬ?</a></li>
+                    <li><a onclick="showContent('control')">УПРАВЛЕНИЕ</a></li>
+                    <li><a onclick="showContent('config')">КОНФИГУРАЦИЯ</a></li>
+                </ul>
+                <div id="about" class="tabcontent" style="display: block;">
+                    <p>HEXPLORE - это интеллектуальная компьютерная игра для одного лица, разворачивающаяся на экране
+                        персонального компьютера. По-другому ее можно рассматривать как модель исследовательской
+                        деятельности, в процессе которой исследователь должен изучить игровую область, чтобы решить одну
+                        из двух взаимоисключающих задач.</p>
+                    <p>Полная картина, по которой можно было бы увидеть решение, порождается случайным образом и не
+                        видна исследователю. В какой-то момент времени может казаться, что для одной из этих двух задач
+                        имеются лучшие шансы, но за несколько ходов положение может измениться на противоположное, так
+                        что до самого конца не ясно, какая же из двух задач будет фактически решена. Случайный выбор
+                        положения вместе с меняющимися решениями исследователя создают неисчерпаемое разнообразие
+                        ситуаций, планов и разочарований.</p>
+                    <p style="text-align: center;">Цейтин Г. С., Ленинградский университет, 1990</p>
+                </div>
+                <div id="how-to-play" class="tabcontent">
+                    <p>Центральная часть экрана представляет собой область в виде ромба, покрытую сеткой из
+                        шестиугольных клеток. Области в двух противоположных углах имеют один цвет (например, красный),
+                        а в остальных двух углах - другой цвет (например, синий). Клетки случайным образом раскрашены в
+                        эти два цвета.</p>
+                    <p>Красный путь - это последовательность из прилегающих друг к другу красных клеток, соединяющая две
+                        угловые красные области. Аналогично, синий путь состоит из прилегающих друг к другу синих клеток
+                        и соединяет две угловые синие области. Математически доказано, что любая картинка такого типа
+                        обязательно имеет или синий, или красный путь.</p>
+                    <p>Ваша задача - найти синий путь или красный путь на картинке, случайным образом порожденной в
+                        машине. Заранее Вы не знаете, какой из путей существует на самом деле. Вам даже не разрешено
+                        видеть цвета клеток. Они все изображены иным цветом (например, серым). Единственное, что Вы
+                        можете делать - это выбирать клетку и просить машину показать ее цвет. Если бы были осмотрены
+                        все клетки, решение было бы очевидным, но предполагается, что Вы будете экономить свои запросы.
+                        Если Вы будете следовать определенному плану, Вам, возможно, удастся найти путь, использовав
+                        мало запросов, так что некоторые участки будут оставаться незакрашенными. Помните, однако, что
+                        нельзя быть полностью уверенными, пока Ваш путь не построен до конца, так что будьте готовы
+                        быстро менять свои планы.</p>
+                </div>
+                <div id="control" class="tabcontent">
+                    <table>
+                        <tr>
+                            <td>ЛКМ</td>
+                            <td>Выбор соты на игоровом поле</td>
+                        </tr>
+                        <tr>
+                            <td>ЗАЖАТЬ ПКМ + ПЕРЕМЕЩЕНИЕ МЫШЬЮ</td>
+                            <td>Свободный обзор игрового поля</td>
+                        </tr>
+                        <tr>
+                            <td>КОЛЕСИКО МЫШИ</td>
+                            <td>Масштабирование игрового поля</td>
+                        </tr>
+                        <tr>
+                            <td>ESC</td>
+                            <td>Показать справку</td>
+                        </tr>
+                        <tr>
+                            <td>ТАБУЛЯЦИЯ</td>
+                            <td>Показать текущую статистику</td>
+                        </tr>
+                        <tr>
+                            <td>ПРОБЕЛ</td>
+                            <td>Открыть все соты</td>
+                        </tr>
+                        <tr>
+                            <td>Ц</td>
+                            <td>Перемещение по игровому полю вверх</td>
+                        </tr>
+                        <tr>
+                            <td>Ы</td>
+                            <td>Перемещение по игровому полю вниз</td>
+                        </tr>
+                        <tr>
+                            <td>Ф</td>
+                            <td>Перемещение по игровому полю влево</td>
+                        </tr>
+                        <tr>
+                            <td>В</td>
+                            <td>Перемещение по игровому полю вправо</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="config" class="tabcontent">
+                    <table>
+                        <tr>
+                            <td>БЛОКИРОВАТЬ ПУТИ</td>
+                            <td>Включить/выключить режим блокировки путей</td>
+                        </tr>
+                        <tr>
+                            <td>КОЛИЧЕСТВО СОТ</td>
+                            <td>Выбор количества сот в одном ряду</td>
+                        </tr>
+                        <tr>
+                            <td>ЦВЕТ #1</td>
+                            <td>Включить/выключить соты первого цвета</td>
+                        </tr>
+                        <tr>
+                            <td>ЦВЕТ #2</td>
+                            <td>Включить/выключить соты второго цвета</td>
+                        </tr>
+                        <tr>
+                            <td>ПАЛИТРА #1</td>
+                            <td>Номер цвета верхнего левого и нижнего правого углов экрана</td>
+                        </tr>
+                        <tr>
+                            <td>ПАЛИТРА #2</td>
+                            <td>Номер цвета верхнего правого и нижнего левого углов экрана</td>
+                        </tr>
+                        <tr>
+                            <td>ПАЛИТРА #3</td>
+                            <td>Номер цвета сот в начальном состоянии</td>
+                        </tr>
+                        <tr>
+                            <td>ПАЛИТРА #4</td>
+                            <td>Номер цвета курсора</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="statistics-id" class="message">
+        <div class="content">
+            <div class="header" id="statistics-header-id">
+                <span class="close" id="statistics-close-id">×</span>
+                <h2>ТЕКУЩАЯ СТАТИСТИКА</h2>
+            </div>
+            <div class="body">
+                <table>
+                    <tr>
+                        <td>Размер поля</td>
+                        <td><span id='area-size-id'></span></td>
+                    </tr>
+                    <tr>
+                        <td>Количество сыгранных партий</td>
+                        <td><span id='number-of-games-id'></span></td>
+                    </tr>
+                    <tr>
+                        <td>Длина пройденного пути</td>
+                        <td><span id='path-length-id'></span></td>
+                    </tr>
+                    <tr>
+                        <td>Количество открытых сот</td>
+                        <td><span id='cells-inspected-id'></span></td>
+                    </tr>
+                    <tr>
+                        <td>Длина пройденного пути, среднее значение</td>
+                        <td><span id='path-length-average-id'></span></td>
+                    </tr>
+                    <tr>
+                        <td>Количество открытых сот, среднее значение</td>
+                        <td><span id='cells-inspected-average-id'></span></td>
+                    </tr>
+                    <tr>
+                        <td>Общая длина пройденного пути</td>
+                        <td><span id='total-path-length-id'></span></td>
+                    </tr>
+                    <tr>
+                        <td>Общее количество открытых сот</td>
+                        <td><span id='total-cells-inspected-id'></span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
