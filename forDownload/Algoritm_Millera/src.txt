@@ -1,0 +1,169 @@
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+typedef unsigned long int uli;
+
+typedef struct pr
+{
+	int deg;
+	uli *mas;
+} prime;
+
+int first_step(uli n)
+{
+	uli m, s, p;
+
+	if (n == 1)
+		return 0;
+
+	m = s = 2;
+	while (true)
+	{
+		p = pow(m, s);
+		if (p == n)
+			return 1;
+
+		if (p > n)
+		{
+			if (s == 2)
+				return 0;
+
+			m++;
+			s = 1;
+		}
+		s++;
+	}
+}
+
+int second_step(uli n, prime pr)
+{
+	int i, a, j, k;
+	uli c, t;
+
+	for (i = 0; i <= pr.deg; i++)
+	{
+		a = pr.mas[i];
+		if (n % a != 0)
+		{
+			c = 1;
+			for (j = 1; j <= n - 1; j++)
+				c = (c*a) % n;
+
+			if (c == 1)
+			{
+				t = n - 1;
+				k = 0;
+				while (t % 2 == 0)
+				{
+					t = t / 2;
+					k++;
+				}
+				k = (n - 1) / pow(2, k);
+
+				c = 1;
+				for (j = 1; j <= k; j++)
+					c = (c*a) % n;
+
+				c = c - 1;
+				if (c < 0)
+					c = c + n;
+
+				if (c != 0)
+				{
+					t = n;
+					do
+					{
+						if (c > t)
+							c = c % t;
+						else
+							t = t % c;
+					} while (c != 0 && t != 0);
+
+					c = c + t;
+				}
+				else
+					c = 1;
+
+				if (c < n && c > 1)
+					return 1;
+			}
+			else
+				return 1;
+		}
+		else
+			return 1;
+	}
+
+	return 0;
+}
+
+int miller(long int n, prime *a)
+{
+	int answ = 1;
+	uli y = n;
+
+	for (int i = 3; i < y; i++)
+	{
+		n = i;
+
+		answ = first_step(n);
+		if (answ == 0)
+			answ = second_step(n, *a);
+
+		if (answ == 0)
+		{
+			a->deg++;
+			a->mas = (uli *)realloc(a->mas, (a->deg + 1) * sizeof(uli));
+			a->mas[a->deg] = n;
+		}
+	}
+
+	return answ;
+}
+
+int main()
+{
+	setlocale(0, "");
+
+	int answ, f, i;
+	uli n;
+	prime a;
+
+	cout << "Введите число: ";
+	cin >> n;
+	unsigned int start_time = clock(); // начальное время
+	answ = 0;
+
+	if (answ == 0)
+	{
+		a.mas = (uli *)malloc(sizeof(uli));
+		a.mas[0] = 2;
+		a.deg = 0;
+
+		if (n > 2)
+		{
+			f = int(2 * log(n)*log(n));
+			miller(f, &a);
+			answ = second_step(n, a);
+		}
+
+		if (answ == 0)
+			answ = first_step(n);
+	}
+
+	unsigned int end_time = clock(); // конечное время
+	unsigned int search_time = (end_time - start_time); // искомое время
+	cout << "Время работы программы: " << search_time << endl;
+
+	cout << "Результат работы алгоритма: ";
+	if (answ == 1)
+		cout << "число составное" << endl;
+	else
+		cout << "число простое" << endl;
+
+	system("pause");
+
+	return 0;
+}
